@@ -1,0 +1,114 @@
+[0.302s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--packages-select', 'stereo_depth_yolo']
+[0.302s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=6, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['stereo_depth_yolo'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0xffffa8b7c700>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0xffffa8d31cc0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0xffffa8d31cc0>>)
+[0.954s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.954s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.954s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.954s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.954s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.955s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.955s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/workspaces/isaac_ros-dev/src/stereo_depth_yolo'
+[0.955s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.955s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.955s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.955s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.955s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.955s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.956s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.956s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.956s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[1.008s] DEBUG:colcon.colcon_core.package_identification:Package '.' with type 'ros.ament_cmake' and name 'stereo_depth_yolo'
+[1.008s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[1.008s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[1.008s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[1.008s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[1.008s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[1.054s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[1.054s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[1.084s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 87 installed packages in /workspaces/isaac_ros-dev/install
+[1.089s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 402 installed packages in /opt/ros/humble
+[1.092s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[1.281s] Level 5:colcon.colcon_core.verb:set package 'stereo_depth_yolo' build argument 'cmake_args' from command line to 'None'
+[1.282s] Level 5:colcon.colcon_core.verb:set package 'stereo_depth_yolo' build argument 'cmake_target' from command line to 'None'
+[1.282s] Level 5:colcon.colcon_core.verb:set package 'stereo_depth_yolo' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.282s] Level 5:colcon.colcon_core.verb:set package 'stereo_depth_yolo' build argument 'cmake_clean_cache' from command line to 'False'
+[1.282s] Level 5:colcon.colcon_core.verb:set package 'stereo_depth_yolo' build argument 'cmake_clean_first' from command line to 'False'
+[1.282s] Level 5:colcon.colcon_core.verb:set package 'stereo_depth_yolo' build argument 'cmake_force_configure' from command line to 'False'
+[1.282s] Level 5:colcon.colcon_core.verb:set package 'stereo_depth_yolo' build argument 'ament_cmake_args' from command line to 'None'
+[1.282s] Level 5:colcon.colcon_core.verb:set package 'stereo_depth_yolo' build argument 'catkin_cmake_args' from command line to 'None'
+[1.282s] Level 5:colcon.colcon_core.verb:set package 'stereo_depth_yolo' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.282s] DEBUG:colcon.colcon_core.verb:Building package 'stereo_depth_yolo' with the following arguments: {'ament_cmake_args': None, 'build_base': '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo', 'merge_install': False, 'path': '/workspaces/isaac_ros-dev/src/stereo_depth_yolo', 'symlink_install': False, 'test_result_base': None}
+[1.282s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[1.284s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[1.285s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/workspaces/isaac_ros-dev/src/stereo_depth_yolo' with build type 'ament_cmake'
+[1.285s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/workspaces/isaac_ros-dev/src/stereo_depth_yolo'
+[1.291s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[1.291s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.291s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.326s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/workspaces/isaac_ros-dev/install/isaac_ros_test:/workspaces/isaac_ros-dev/install/isaac_ros_pynitros:/workspaces/isaac_ros-dev/install/isaac_ros_rosbag_utils:/workspaces/isaac_ros-dev/install/isaac_ros_launch_utils:/workspaces/isaac_ros-dev/install/isaac_common_py:/opt/ros/humble /usr/bin/cmake --build /workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo -- -j6 -l6
+[1.589s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/workspaces/isaac_ros-dev/install/isaac_ros_test:/workspaces/isaac_ros-dev/install/isaac_ros_pynitros:/workspaces/isaac_ros-dev/install/isaac_ros_rosbag_utils:/workspaces/isaac_ros-dev/install/isaac_ros_launch_utils:/workspaces/isaac_ros-dev/install/isaac_common_py:/opt/ros/humble /usr/bin/cmake --build /workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo -- -j6 -l6
+[1.618s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/workspaces/isaac_ros-dev/install/isaac_ros_test:/workspaces/isaac_ros-dev/install/isaac_ros_pynitros:/workspaces/isaac_ros-dev/install/isaac_ros_rosbag_utils:/workspaces/isaac_ros-dev/install/isaac_ros_launch_utils:/workspaces/isaac_ros-dev/install/isaac_common_py:/opt/ros/humble /usr/bin/cmake --install /workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo
+[1.653s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(stereo_depth_yolo)
+[1.654s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/workspaces/isaac_ros-dev/install/isaac_ros_test:/workspaces/isaac_ros-dev/install/isaac_ros_pynitros:/workspaces/isaac_ros-dev/install/isaac_ros_rosbag_utils:/workspaces/isaac_ros-dev/install/isaac_ros_launch_utils:/workspaces/isaac_ros-dev/install/isaac_common_py:/opt/ros/humble /usr/bin/cmake --install /workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo
+[1.661s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo' for CMake module files
+[1.662s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo' for CMake config files
+[1.662s] Level 1:colcon.colcon_core.shell:create_environment_hook('stereo_depth_yolo', 'cmake_prefix_path')
+[1.663s] INFO:colcon.colcon_core.shell:Creating environment hook '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/hook/cmake_prefix_path.ps1'
+[1.664s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/hook/cmake_prefix_path.dsv'
+[1.665s] INFO:colcon.colcon_core.shell:Creating environment hook '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/hook/cmake_prefix_path.sh'
+[1.667s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/lib'
+[1.667s] Level 1:colcon.colcon_core.shell:create_environment_hook('stereo_depth_yolo', 'ld_library_path_lib')
+[1.667s] INFO:colcon.colcon_core.shell:Creating environment hook '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/hook/ld_library_path_lib.ps1'
+[1.668s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/hook/ld_library_path_lib.dsv'
+[1.669s] INFO:colcon.colcon_core.shell:Creating environment hook '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/hook/ld_library_path_lib.sh'
+[1.669s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/bin'
+[1.670s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/lib/pkgconfig/stereo_depth_yolo.pc'
+[1.670s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/lib/python3.10/site-packages'
+[1.671s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/bin'
+[1.671s] INFO:colcon.colcon_core.shell:Creating package script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/package.ps1'
+[1.673s] INFO:colcon.colcon_core.shell:Creating package descriptor '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/package.dsv'
+[1.674s] INFO:colcon.colcon_core.shell:Creating package script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/package.sh'
+[1.675s] INFO:colcon.colcon_core.shell:Creating package script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/package.bash'
+[1.677s] INFO:colcon.colcon_core.shell:Creating package script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/package.zsh'
+[1.678s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/colcon-core/packages/stereo_depth_yolo)
+[1.679s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(stereo_depth_yolo)
+[1.679s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo' for CMake module files
+[1.680s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo' for CMake config files
+[1.681s] Level 1:colcon.colcon_core.shell:create_environment_hook('stereo_depth_yolo', 'cmake_prefix_path')
+[1.681s] INFO:colcon.colcon_core.shell:Creating environment hook '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/hook/cmake_prefix_path.ps1'
+[1.682s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/hook/cmake_prefix_path.dsv'
+[1.682s] INFO:colcon.colcon_core.shell:Creating environment hook '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/hook/cmake_prefix_path.sh'
+[1.683s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/lib'
+[1.684s] Level 1:colcon.colcon_core.shell:create_environment_hook('stereo_depth_yolo', 'ld_library_path_lib')
+[1.684s] INFO:colcon.colcon_core.shell:Creating environment hook '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/hook/ld_library_path_lib.ps1'
+[1.685s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/hook/ld_library_path_lib.dsv'
+[1.686s] INFO:colcon.colcon_core.shell:Creating environment hook '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/hook/ld_library_path_lib.sh'
+[1.686s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/bin'
+[1.687s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/lib/pkgconfig/stereo_depth_yolo.pc'
+[1.687s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/lib/python3.10/site-packages'
+[1.688s] Level 1:colcon.colcon_core.environment:checking '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/bin'
+[1.688s] INFO:colcon.colcon_core.shell:Creating package script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/package.ps1'
+[1.689s] INFO:colcon.colcon_core.shell:Creating package descriptor '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/package.dsv'
+[1.690s] INFO:colcon.colcon_core.shell:Creating package script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/package.sh'
+[1.691s] INFO:colcon.colcon_core.shell:Creating package script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/package.bash'
+[1.692s] INFO:colcon.colcon_core.shell:Creating package script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/package.zsh'
+[1.692s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/colcon-core/packages/stereo_depth_yolo)
+[1.693s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[1.694s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[1.694s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[1.694s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[1.713s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[1.713s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[1.713s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[1.713s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[1.714s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.NotSupported: Unable to autolaunch a dbus-daemon without a $DISPLAY for X11
+[1.714s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[1.714s] INFO:colcon.colcon_core.shell:Creating prefix script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/local_setup.ps1'
+[1.716s] INFO:colcon.colcon_core.shell:Creating prefix util module '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/_local_setup_util_ps1.py'
+[1.718s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/setup.ps1'
+[1.727s] INFO:colcon.colcon_core.shell:Creating prefix script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/local_setup.sh'
+[1.728s] INFO:colcon.colcon_core.shell:Creating prefix util module '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/_local_setup_util_sh.py'
+[1.729s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/setup.sh'
+[1.737s] INFO:colcon.colcon_core.shell:Creating prefix script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/local_setup.bash'
+[1.738s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/setup.bash'
+[1.746s] INFO:colcon.colcon_core.shell:Creating prefix script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/local_setup.zsh'
+[1.747s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/setup.zsh'

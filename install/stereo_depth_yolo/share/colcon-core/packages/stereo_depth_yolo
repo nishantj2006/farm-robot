@@ -1,0 +1,1 @@
+cv_bridge:isaac_ros_managed_nitros:isaac_ros_nitros_image_type:rclcpp:rclpy:sensor_msgs:std_msgs:stereo_msgs:vision_msgs

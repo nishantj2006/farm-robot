@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-1e8ee6f67ba8dd57712d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "stereo_depth_yolo",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "stereo_depth_yolo_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-stereo_depth_yolo_uninstall-9bc521e194eb6f7cc776.json",
+					"name" : "stereo_depth_yolo_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "stereo_header_sync_node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-stereo_header_sync_node-083b721c59ed61133cb9.json",
+					"name" : "stereo_header_sync_node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "stereo_header_sync_node_exe::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-stereo_header_sync_node_exe-fdb917f40f0ddb7a3107.json",
+					"name" : "stereo_header_sync_node_exe",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-c65262bdc24fa07c6557.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo",
+		"source" : "/workspaces/isaac_ros-dev/src/stereo_depth_yolo"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

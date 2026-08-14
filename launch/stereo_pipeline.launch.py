@@ -4,6 +4,7 @@ from launch import LaunchDescription
 from launch.actions import OpaqueFunction
 from launch_ros.actions import ComposableNodeContainer, Node
 from launch_ros.descriptions import ComposableNode
+from launch.actions import SetEnvironmentVariable
 
 def launch_setup(context, *args, **kwargs):
     pkg_dir = get_package_share_directory('stereo_depth_yolo')
@@ -11,8 +12,9 @@ def launch_setup(context, *args, **kwargs):
     width = 1280
     height = 720
     net_height = 736
-    engine_path = '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/model_capped.plan'
-    onnx_path = '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/best.onnx'
+    
+    # Pointing to the new dynamic batched engine
+    engine_path = '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/model_batched.plan'
 
     left_yaml = os.path.join(pkg_dir, 'config', 'left.yaml')
     right_yaml = os.path.join(pkg_dir, 'config', 'right.yaml')
@@ -51,9 +53,17 @@ def launch_setup(context, *args, **kwargs):
     )
 
     left_trt = ComposableNode(
-        package='isaac_ros_tensor_rt', plugin='nvidia::isaac_ros::dnn_inference::TensorRTNode',
+        package='isaac_ros_triton', plugin='nvidia::isaac_ros::dnn_inference::TritonNode',
         name='left_trt',
-        parameters=[{'engine_file_path': engine_path, 'force_engine_update': False, 'input_tensor_names': ['input_tensor'], 'input_binding_names': ['images'], 'output_tensor_names': ['output_tensor'], 'output_binding_names': ['output0'], 'input_dimensions': [1, 3, net_height, width]}],
+        parameters=[{
+            'model_name': 'yolov8',
+            'model_repository_paths': ['/workspaces/isaac_ros-dev/src/stereo_depth_yolo/triton_repo'],
+            'max_batch_size': 2,
+            'input_tensor_names': ['input_tensor'],
+            'input_binding_names': ['images'],
+            'output_tensor_names': ['output_tensor'],
+            'output_binding_names': ['output0']
+        }],
         remappings=[('tensor_pub', '/left/encoded_tensor'), ('tensor_sub', '/left/trt_output')]
     )
 
@@ -97,15 +107,23 @@ def launch_setup(context, *args, **kwargs):
     )
 
     right_trt = ComposableNode(
-        package='isaac_ros_tensor_rt', plugin='nvidia::isaac_ros::dnn_inference::TensorRTNode',
+        package='isaac_ros_triton', plugin='nvidia::isaac_ros::dnn_inference::TritonNode',
         name='right_trt',
-        parameters=[{'engine_file_path': engine_path, 'input_tensor_names': ['input_tensor'], 'input_binding_names': ['images'], 'output_tensor_names': ['output_tensor'], 'output_binding_names': ['output0'], 'input_dimensions': [1, 3, net_height, width]}],
+        parameters=[{
+            'model_name': 'yolov8',
+            'model_repository_paths': ['/workspaces/isaac_ros-dev/src/stereo_depth_yolo/triton_repo'],
+            'max_batch_size': 2,
+            'input_tensor_names': ['input_tensor'],
+            'input_binding_names': ['images'],
+            'output_tensor_names': ['output_tensor'],
+            'output_binding_names': ['output0']
+        }],
         remappings=[('tensor_pub', '/right/encoded_tensor'), ('tensor_sub', '/right/trt_output')]
     )
 
     right_decoder = ComposableNode(
         package='isaac_ros_yolov8', plugin='nvidia::isaac_ros::yolov8::YoloV8DecoderNode',
-        name='right_decoder', parameters=[{'tensor_name': 'output_tensor', 'confidence_threshold': 0.5, 'nms_threshold': 0.45, 'num_classes': 1}],
+        name='right_decoder', parameters=[{'tensor_name': 'output_tensor', 'confidence_threshold': 0.8, 'nms_threshold': 0.45, 'num_classes': 1}],
         remappings=[('tensor_sub', '/right/trt_output'), ('detections_output', '/right/detections')]
     )
 
@@ -113,10 +131,10 @@ def launch_setup(context, *args, **kwargs):
         name='dual_ai_container', namespace='',
         package='rclcpp_components', executable='component_container_mt',
         composable_node_descriptions=[
-            left_cam, left_rectify, left_encoder, left_trt, left_decoder
-            , right_cam, right_rectify, right_encoder, right_trt, right_decoder
+            left_cam, left_rectify, left_encoder, left_trt, left_decoder, 
+            right_cam, right_rectify, right_encoder, right_trt, right_decoder
         ],
-        arguments=['--ros-args', '--log-level', 'info'],
+        arguments=['--ros-args', '--log-level', 'error'],
         output='screen'
     )
 
@@ -128,4 +146,4 @@ def launch_setup(context, *args, **kwargs):
     return [container, spatial_detection_node]
 
 def generate_launch_description():
-    return LaunchDescription([OpaqueFunction(function=launch_setup)])
+    return LaunchDescription([SetEnvironmentVariable('GXF_LOG_LEVEL', 'ERROR'), OpaqueFunction(function=launch_setup)])

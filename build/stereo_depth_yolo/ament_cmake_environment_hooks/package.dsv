@@ -1,0 +1,4 @@
+source;share/stereo_depth_yolo/local_setup.bash
+source;share/stereo_depth_yolo/local_setup.dsv
+source;share/stereo_depth_yolo/local_setup.sh
+source;share/stereo_depth_yolo/local_setup.zsh

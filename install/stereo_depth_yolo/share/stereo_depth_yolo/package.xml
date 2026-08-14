@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.ros.org/schema/package_format3.xsd"?>
+<package format="3">
+  <name>stereo_depth_yolo</name>
+  <version>1.0.0</version>
+  <description>GPU Accelerated Stereo Disparity + YOLO 3D Position Package</description>
+  <maintainer email="user@todo.todo">nishantj</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+
+  <!-- C++ & ROS 2 Core Dependencies -->
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>vision_msgs</depend>
+  <depend>stereo_msgs</depend>
+  <depend>cv_bridge</depend>
+
+  <!-- NVIDIA NITROS Dependencies -->
+  <depend>isaac_ros_managed_nitros</depend>
+  <depend>isaac_ros_nitros_image_type</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,42 @@
+[0.040s] Invoking command in '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/workspaces/isaac_ros-dev/install/isaac_ros_test:/workspaces/isaac_ros-dev/install/isaac_ros_pynitros:/workspaces/isaac_ros-dev/install/isaac_ros_rosbag_utils:/workspaces/isaac_ros-dev/install/isaac_ros_launch_utils:/workspaces/isaac_ros-dev/install/isaac_common_py:/opt/ros/humble /usr/bin/cmake --build /workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo -- -j6 -l6
+[0.222s] [35m[1mConsolidate compiler generated dependencies of target stereo_header_sync_node[0m
+[0.222s] [35m[1mConsolidate compiler generated dependencies of target stereo_header_sync_node_exe[0m
+[0.285s] [100%] Built target stereo_header_sync_node
+[0.286s] [100%] Built target stereo_header_sync_node_exe
+[0.316s] Invoked command in '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/workspaces/isaac_ros-dev/install/isaac_ros_test:/workspaces/isaac_ros-dev/install/isaac_ros_pynitros:/workspaces/isaac_ros-dev/install/isaac_ros_rosbag_utils:/workspaces/isaac_ros-dev/install/isaac_ros_launch_utils:/workspaces/isaac_ros-dev/install/isaac_common_py:/opt/ros/humble /usr/bin/cmake --build /workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo -- -j6 -l6
+[0.346s] Invoking command in '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/workspaces/isaac_ros-dev/install/isaac_ros_test:/workspaces/isaac_ros-dev/install/isaac_ros_pynitros:/workspaces/isaac_ros-dev/install/isaac_ros_rosbag_utils:/workspaces/isaac_ros-dev/install/isaac_ros_launch_utils:/workspaces/isaac_ros-dev/install/isaac_common_py:/opt/ros/humble /usr/bin/cmake --install /workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo
+[0.371s] -- Install configuration: ""
+[0.371s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/lib/stereo_depth_yolo/stereo_header_sync_node_exe
+[0.373s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/lib/libstereo_header_sync_node.so
+[0.373s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/launch
+[0.373s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/launch/stereo_pipeline_old.launch.py
+[0.373s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/launch/__pycache__
+[0.373s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/launch/__pycache__/calib_cam.launch.cpython-310.pyc
+[0.374s] -- Installing: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/launch/stereo_pipeline.launch.py
+[0.374s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/launch/calib_cam.launch.py
+[0.374s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/config
+[0.374s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/config/left.yaml
+[0.374s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/config/model_big.plan
+[0.374s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/config/old
+[0.374s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/config/old/left.yaml
+[0.375s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/config/old/right.yaml
+[0.375s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/config/model.onnx
+[0.375s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/config/right.yaml
+[0.375s] -- Installing: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/lib/stereo_depth_yolo/spatial_detection_node.py
+[0.375s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/ament_index/resource_index/package_run_dependencies/stereo_depth_yolo
+[0.375s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/ament_index/resource_index/parent_prefix_path/stereo_depth_yolo
+[0.376s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/environment/ament_prefix_path.sh
+[0.376s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/environment/ament_prefix_path.dsv
+[0.376s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/environment/path.sh
+[0.376s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/environment/path.dsv
+[0.376s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/local_setup.bash
+[0.376s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/local_setup.sh
+[0.376s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/local_setup.zsh
+[0.377s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/local_setup.dsv
+[0.377s] -- Installing: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/package.dsv
+[0.377s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/ament_index/resource_index/packages/stereo_depth_yolo
+[0.377s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/ament_index/resource_index/rclcpp_components/stereo_depth_yolo
+[0.377s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/cmake/stereo_depth_yoloConfig.cmake
+[0.377s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/cmake/stereo_depth_yoloConfig-version.cmake
+[0.377s] -- Up-to-date: /workspaces/isaac_ros-dev/src/stereo_depth_yolo/install/stereo_depth_yolo/share/stereo_depth_yolo/package.xml
+[0.379s] Invoked command in '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/workspaces/isaac_ros-dev/install/isaac_ros_test:/workspaces/isaac_ros-dev/install/isaac_ros_pynitros:/workspaces/isaac_ros-dev/install/isaac_ros_rosbag_utils:/workspaces/isaac_ros-dev/install/isaac_ros_launch_utils:/workspaces/isaac_ros-dev/install/isaac_common_py:/opt/ros/humble /usr/bin/cmake --install /workspaces/isaac_ros-dev/src/stereo_depth_yolo/build/stereo_depth_yolo
