@@ -35,7 +35,7 @@ class SpatialDetectionNode(Node):
             self, Detection2DArray, '/right/detections', callback_group=self.cb_group
         )
         
-        # 3. Synchronize AI outputs (Increased slop to 120ms to prevent dropped pairs)
+        # 3. Synchronize AI outputs (120ms slop)
         self.sync = message_filters.ApproximateTimeSynchronizer(
             [self.left_sub, self.right_sub], queue_size=20, slop=0.12
         )
@@ -63,40 +63,49 @@ class SpatialDetectionNode(Node):
         right_count = len(right_msg.detections)
 
         # -------------------------------------------------------------
-        # 1. Log LEFT Camera Detections
+        # 0. SILENT FILTER: Exit immediately if both see 0 lemons
         # -------------------------------------------------------------
-        for l_det in left_msg.detections:
-            l_class = l_det.results[0].hypothesis.class_id
-            l_x = l_det.bbox.center.position.x
-            l_y = l_det.bbox.center.position.y
-            self.get_logger().info(
-                f"[LEFT CAM] Detected Class: {l_class} at pixel ({l_x:.1f}, {l_y:.1f})"
-            )
+        if left_count == 0 and right_count == 0:
+            return
 
         # -------------------------------------------------------------
-        # 2. Log RIGHT Camera Detections
+        # 1. Print Summary (Only triggers when 1 or more lemons are seen)
         # -------------------------------------------------------------
-        for r_det in right_msg.detections:
-            r_class = r_det.results[0].hypothesis.class_id
-            r_x = r_det.bbox.center.position.x
-            r_y = r_det.bbox.center.position.y
-            self.get_logger().info(
-                f"[RIGHT CAM] Detected Class: {r_class} at pixel ({r_x:.1f}, {r_y:.1f})"
-            )
+        self.get_logger().info(
+            f"[FRAME SUMMARY] Left Camera sees {left_count} lemon(s) | Right Camera sees {right_count} lemon(s)"
+        )
 
-        # Explicit diagnostic log when one camera yields zero detections
+        # Diagnostic log when one camera yields zero detections
         if left_count > 0 and right_count == 0:
             self.get_logger().warn("[SYNC WARNING] Left camera saw object, but Right camera output 0 detections.")
             return
         elif left_count == 0 and right_count > 0:
             self.get_logger().warn("[SYNC WARNING] Right camera saw object, but Left camera output 0 detections.")
             return
-        elif left_count == 0 and right_count == 0:
-            return
+
+        # -------------------------------------------------------------
+        # 2. Log 2D Pixel Positions for Debugging
+        # -------------------------------------------------------------
+        for l_det in left_msg.detections:
+            l_class = l_det.results[0].hypothesis.class_id
+            l_x = l_det.bbox.center.position.x
+            l_y = l_det.bbox.center.position.y
+            self.get_logger().info(
+                f"  -> [LEFT DET] Class {l_class} @ 2D Pixel: ({l_x:.1f}, {l_y:.1f})"
+            )
+
+        for r_det in right_msg.detections:
+            r_class = r_det.results[0].hypothesis.class_id
+            r_x = r_det.bbox.center.position.x
+            r_y = r_det.bbox.center.position.y
+            self.get_logger().info(
+                f"  -> [RIGHT DET] Class {r_class} @ 2D Pixel: ({r_x:.1f}, {r_y:.1f})"
+            )
 
         # -------------------------------------------------------------
         # 3. Perform Epipolar Stereo Matching & Triangulation
         # -------------------------------------------------------------
+        matched_pairs = 0
         for l_det in left_msg.detections:
             l_class = l_det.results[0].hypothesis.class_id
             l_x = l_det.bbox.center.position.x
@@ -129,16 +138,17 @@ class SpatialDetectionNode(Node):
                     depth_z = (self.focal_length_x * self.baseline) / disparity
                     real_x = ((l_x - self.center_x) * depth_z) / self.focal_length_x
                     real_y = ((l_y - self.center_y) * depth_z) / self.focal_length_y
+                    matched_pairs += 1
                     
                     self.get_logger().info(
-                        f"[STEREO MATCH] [Class: {l_class}] | X: {real_x:.2f}m, Y: {real_y:.2f}m, Z: {depth_z:.2f}m"
+                        f"  ==> [3D MATCH #{matched_pairs}] [Class: {l_class}] "
+                        f"Location -> X: {real_x:.2f}m, Y: {real_y:.2f}m, Z: {depth_z:.2f}m"
                     )
 
 def main(args=None):
     rclpy.init(args=args)
     node = SpatialDetectionNode()
     
-    # Use MultiThreadedExecutor to process callbacks concurrently
     executor = MultiThreadedExecutor()
     executor.add_node(node)
     
