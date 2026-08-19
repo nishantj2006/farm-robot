@@ -13,7 +13,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    # 2. Define Left Camera
+    # ---------------- LEFT CAMERA BLOCK ----------------
     left_cam = ComposableNode(
         name='left_cam',
         package='isaac_ros_argus_camera',
@@ -21,17 +21,31 @@ def generate_launch_description():
         parameters=[{
             'camera_id': 0,
             'module_id': 0,
-            'image_width': 1280,
-            'image_height': 720,
-            'fps': 30
         }],
         remappings=[
-            ('image_raw', '/left/image_raw'),
-            ('camera_info', '/left/camera_info')
+            ('left/image_raw', '/left/image_raw_native'),
+            ('left/camera_info', '/left/camera_info_native')
         ]
     )
 
-    # 3. Define Right Camera
+    left_resize = ComposableNode(
+        name='left_resize',
+        package='isaac_ros_image_proc',
+        plugin='nvidia::isaac_ros::image_proc::ResizeNode',
+        parameters=[{
+            'output_width': 1280,
+            'output_height': 720,
+            'keep_aspect_ratio': False
+        }],
+        remappings=[
+            ('image', '/left/image_raw_native'),
+            ('camera_info', '/left/camera_info_native'),
+            ('resize/image', '/left/image_raw'),
+            ('resize/camera_info', '/left/camera_info')
+        ]
+    )
+
+    # ---------------- RIGHT CAMERA BLOCK ----------------
     right_cam = ComposableNode(
         name='right_cam',
         package='isaac_ros_argus_camera',
@@ -39,29 +53,56 @@ def generate_launch_description():
         parameters=[{
             'camera_id': 1,
             'module_id': 0,
-            'image_width': 1280,
-            'image_height': 720,
-            'fps': 30
         }],
         remappings=[
-            ('image_raw', '/right/image_raw'),
-            ('camera_info', '/right/camera_info')
+            ('left/image_raw', '/right/image_raw_native'),
+            ('left/camera_info', '/right/camera_info_native')
         ]
     )
 
-    # 4. Action to load the nodes into the container
-    load_nodes = LoadComposableNodes(
-        target_container='cam_container',
-        composable_node_descriptions=[left_cam, right_cam]
+    right_resize = ComposableNode(
+        name='right_resize',
+        package='isaac_ros_image_proc',
+        plugin='nvidia::isaac_ros::image_proc::ResizeNode',
+        parameters=[{
+            'output_width': 1280,
+            'output_height': 720,
+            'keep_aspect_ratio': False
+        }],
+        remappings=[
+            ('image', '/right/image_raw_native'),
+            ('camera_info', '/right/camera_info_native'),
+            ('resize/image', '/right/image_raw'),
+            ('resize/camera_info', '/right/camera_info')
+        ]
     )
 
-    # 5. Wait 2 seconds after container starts before loading nodes (Eliminates Race Condition)
-    delayed_node_load = TimerAction(
-        period=2.0,
-        actions=[load_nodes]
+    # ---------------- LOADING & DELAYS ----------------
+    # Load Left Camera & Left Resize together
+    load_left_nodes = LoadComposableNodes(
+        target_container='cam_container',
+        composable_node_descriptions=[left_cam, left_resize]
+    )
+
+    # Load Right Camera & Right Resize together
+    load_right_nodes = LoadComposableNodes(
+        target_container='cam_container',
+        composable_node_descriptions=[right_cam, right_resize]
+    )
+
+    # Staggered startups to prevent libargus crashes
+    delay_left = TimerAction(
+        period=1.0,
+        actions=[load_left_nodes]
+    )
+
+    delay_right = TimerAction(
+        period=3.0,
+        actions=[load_right_nodes]
     )
 
     return LaunchDescription([
         cam_container,
-        delayed_node_load
+        delay_left,
+        delay_right
     ])

@@ -69,7 +69,7 @@ def launch_setup(context, *args, **kwargs):
 
     left_decoder = ComposableNode(
         package='isaac_ros_yolov8', plugin='nvidia::isaac_ros::yolov8::YoloV8DecoderNode',
-        name='left_decoder', parameters=[{'tensor_name': 'output_tensor', 'confidence_threshold': 0.6, 'nms_threshold': 0.45, 'num_classes': 1}],
+        name='left_decoder', parameters=[{'tensor_name': 'output_tensor', 'confidence_threshold': 0.7, 'nms_threshold': 0.45, 'num_classes': 1}],
         remappings=[('tensor_sub', '/left/trt_output'), ('detections_output', '/left/detections')]
     )
 
@@ -123,7 +123,7 @@ def launch_setup(context, *args, **kwargs):
 
     right_decoder = ComposableNode(
         package='isaac_ros_yolov8', plugin='nvidia::isaac_ros::yolov8::YoloV8DecoderNode',
-        name='right_decoder', parameters=[{'tensor_name': 'output_tensor', 'confidence_threshold': 0.6, 'nms_threshold': 0.45, 'num_classes': 1}],
+        name='right_decoder', parameters=[{'tensor_name': 'output_tensor', 'confidence_threshold': 0.7, 'nms_threshold': 0.45, 'num_classes': 1}],
         remappings=[('tensor_sub', '/right/trt_output'), ('detections_output', '/right/detections')]
     )
 

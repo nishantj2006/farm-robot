@@ -14,18 +14,27 @@ class SpatialDetectionNode(Node):
         # Thread safety callback group
         self.cb_group = ReentrantCallbackGroup()
 
-        # Physical camera baseline in meters (60mm)
-        self.baseline = 0.06 
-        self.focal_length_x = None
-        self.focal_length_y = None
-        self.center_x = None
-        self.center_y = None
+
+        # Calibrated 720p physical baseline (59.52 mm)
+        self.baseline = 0.05952 
+        
+        # HARDCODED INTRINSICS FROM left2.yaml
+        self.focal_length_x = 893.74551
+        self.focal_length_y = 893.74551
+        self.center_x = 657.54638
+        self.center_y = 373.61695
+        # Calibrated 720p physical baseline (59.52 mm)
+        # self.baseline = 0.05952 
+        # self.focal_length_x = None
+        # self.focal_length_y = None
+        # self.center_x = None
+        # self.center_y = None
         
         # 1. Grab intrinsic focal length from Rectified Camera Info
-        self.info_sub = self.create_subscription(
-            CameraInfo, '/left/camera_info_rect', self.camera_info_callback, 10,
-            callback_group=self.cb_group
-        )
+        # self.info_sub = self.create_subscription(
+        #     CameraInfo, '/left/camera_info_rect', self.camera_info_callback, 10,
+        #     callback_group=self.cb_group
+        # )
         
         # 2. Subscribe to both high-speed YOLO outputs
         self.left_sub = message_filters.Subscriber(
@@ -43,17 +52,22 @@ class SpatialDetectionNode(Node):
 
         self.get_logger().info("Sparse Stereo Matchmaker initialized. Waiting for detections...")
 
-    def camera_info_callback(self, msg):
-        if self.focal_length_x is None:
-            # P matrix: [f_x, 0, c_x, Tx, 0, f_y, c_y, Ty, 0, 0, 1, 0]
-            self.focal_length_x = msg.p[0]  # f_x
-            self.focal_length_y = msg.p[5]  # f_y
-            self.center_x = msg.p[2]        # c_x
-            self.center_y = msg.p[6]        # c_y
-            self.get_logger().info("Acquired Camera Intrinsics for 3D Projection")
+    # def camera_info_callback(self, msg):
+    #     if self.focal_length_x is None:
+    #         # P matrix: [f_x, 0, c_x, Tx, 0, f_y, c_y, Ty, 0, 0, 1, 0]
+    #         self.focal_length_x = msg.p[0]  # f_x
+    #         self.focal_length_y = msg.p[5]  # f_y
+    #         self.center_x = msg.p[2]        # c_x
+    #         self.center_y = msg.p[6]        # c_y
             
-            # Destroy subscription after acquiring intrinsics to save CPU
-            self.destroy_subscription(self.info_sub)
+    #         # DIAGNOSTIC LOG: Print parameters so you can verify the YAML values
+    #         self.get_logger().info(
+    #             f"Acquired Intrinsics -> fx: {self.focal_length_x:.2f}, fy: {self.focal_length_y:.2f}, "
+    #             f"cx: {self.center_x:.2f}, cy: {self.center_y:.2f}"
+    #         )
+            
+    #         # Destroy subscription after acquiring intrinsics to save CPU
+    #         self.destroy_subscription(self.info_sub)
 
     def sync_callback(self, left_msg, right_msg):
         if self.focal_length_x is None:
@@ -69,13 +83,12 @@ class SpatialDetectionNode(Node):
             return
 
         # -------------------------------------------------------------
-        # 1. Print Summary (Only triggers when 1 or more lemons are seen)
+        # 1. Print Summary 
         # -------------------------------------------------------------
         self.get_logger().info(
             f"[FRAME SUMMARY] Left Camera sees {left_count} lemon(s) | Right Camera sees {right_count} lemon(s)"
         )
 
-        # Diagnostic log when one camera yields zero detections
         if left_count > 0 and right_count == 0:
             self.get_logger().warn("[SYNC WARNING] Left camera saw object, but Right camera output 0 detections.")
             return
@@ -103,34 +116,51 @@ class SpatialDetectionNode(Node):
             )
 
         # -------------------------------------------------------------
-        # 3. Perform Epipolar Stereo Matching & Triangulation
+        # 3. Robust Stereo Matching
         # -------------------------------------------------------------
         matched_pairs = 0
+        claimed_r_indices = set()
+
         for l_det in left_msg.detections:
-            l_class = l_det.results[0].hypothesis.class_id
+            raw_l_class = l_det.results[0].hypothesis.class_id
+            l_class = 0 if raw_l_class in [0, 1] else raw_l_class
+            
             l_x = l_det.bbox.center.position.x
             l_y = l_det.bbox.center.position.y
+            l_area = l_det.bbox.size_x * l_det.bbox.size_y
             
             best_match = None
-            best_y_diff = float('inf')
+            best_match_idx = -1
+            lowest_cost = float('inf')
             
-            for r_det in right_msg.detections:
-                r_class = r_det.results[0].hypothesis.class_id
+            for r_idx, r_det in enumerate(right_msg.detections):
+                if r_idx in claimed_r_indices:
+                    continue
+                
+                raw_r_class = r_det.results[0].hypothesis.class_id
+                r_class = 0 if raw_r_class in [0, 1] else raw_r_class
+                
                 r_x = r_det.bbox.center.position.x
                 r_y = r_det.bbox.center.position.y
+                r_area = r_det.bbox.size_x * r_det.bbox.size_y
                 
-                # Rule 1: Same object class
                 if l_class == r_class:
-                    # Rule 2: Epipolar Constraint (Y-centers must vertically align)
                     y_diff = abs(l_y - r_y)
                     
-                    # Allow up to 20px vertical tolerance and require l_x > r_x
-                    if y_diff < 20.0 and y_diff < best_y_diff and l_x > r_x:
-                        best_match = r_det
-                        best_y_diff = y_diff
+                    # Relaxed vertical tolerance (65px) to accommodate non-rectified bounding box drift
+                    if y_diff < 65.0 and l_x > r_x:
+                        
+                        size_diff_ratio = abs(l_area - r_area) / max(l_area, r_area)
+                        cost = y_diff + (size_diff_ratio * 100)
+                        
+                        if cost < lowest_cost and size_diff_ratio < 0.40:
+                            lowest_cost = cost
+                            best_match = r_det
+                            best_match_idx = r_idx
             
-            # If a valid stereo pair is found, calculate 3D distance
             if best_match:
+                claimed_r_indices.add(best_match_idx)
+                
                 r_x = best_match.bbox.center.position.x
                 disparity = l_x - r_x
                 
