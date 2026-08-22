@@ -3,7 +3,7 @@
 <package format="3">
   <name>stereo_depth_yolo</name>
   <version>1.0.0</version>
-  <description>GPU Accelerated Stereo Disparity + YOLO 3D Position Package</description>
+  <description>GPU Accelerated Stereo Disparity + YOLO 3D Position Package (w/ Sync Spoofer)</description>
   <maintainer email="user@todo.todo">nishantj</maintainer>
   <license>Apache-2.0</license>
 
@@ -18,6 +18,7 @@
   <depend>vision_msgs</depend>
   <depend>stereo_msgs</depend>
   <depend>cv_bridge</depend>
+  <depend>message_filters</depend>
 
   <!-- NVIDIA NITROS Dependencies -->
   <depend>isaac_ros_managed_nitros</depend>

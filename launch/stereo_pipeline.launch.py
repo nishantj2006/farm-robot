@@ -13,7 +13,6 @@ def launch_setup(context, *args, **kwargs):
     height = 720
     net_height = 736
     
-    # Pointing to the new dynamic batched engine
     engine_path = '/workspaces/isaac_ros-dev/src/stereo_depth_yolo/model_batched.plan'
 
     left_yaml = os.path.join(pkg_dir, 'config', 'left.yaml')
@@ -70,7 +69,14 @@ def launch_setup(context, *args, **kwargs):
     left_decoder = ComposableNode(
         package='isaac_ros_yolov8', plugin='nvidia::isaac_ros::yolov8::YoloV8DecoderNode',
         name='left_decoder', parameters=[{'tensor_name': 'output_tensor', 'confidence_threshold': 0.7, 'nms_threshold': 0.45, 'num_classes': 1}],
-        remappings=[('tensor_sub', '/left/trt_output'), ('detections_output', '/left/detections')]
+        remappings=[('tensor_sub', '/left/trt_output'), ('detections_output', '/left/detections_raw')] # CHANGED
+    )
+
+    left_tracker = ComposableNode(
+        package='isaac_ros_nvsort', plugin='nvidia::isaac_ros::nvsort::NvSortNode',
+        name='left_tracker',
+        parameters=[{'track_threshold': 0.3, 'enable_iou_blend': True}],
+        remappings=[('detections_in', '/left/detections_raw'), ('tracking_out', '/left/detections')] # NEW
     )
 
     # ==========================================
@@ -124,15 +130,22 @@ def launch_setup(context, *args, **kwargs):
     right_decoder = ComposableNode(
         package='isaac_ros_yolov8', plugin='nvidia::isaac_ros::yolov8::YoloV8DecoderNode',
         name='right_decoder', parameters=[{'tensor_name': 'output_tensor', 'confidence_threshold': 0.7, 'nms_threshold': 0.45, 'num_classes': 1}],
-        remappings=[('tensor_sub', '/right/trt_output'), ('detections_output', '/right/detections')]
+        remappings=[('tensor_sub', '/right/trt_output'), ('detections_output', '/right/detections_raw')] # CHANGED
+    )
+
+    right_tracker = ComposableNode(
+        package='isaac_ros_nvsort', plugin='nvidia::isaac_ros::nvsort::NvSortNode',
+        name='right_tracker',
+        parameters=[{'track_threshold': 0.3, 'enable_iou_blend': True}],
+        remappings=[('detections_in', '/right/detections_raw'), ('tracking_out', '/right/detections')] # NEW
     )
 
     container = ComposableNodeContainer(
         name='dual_ai_container', namespace='',
         package='rclcpp_components', executable='component_container_mt',
         composable_node_descriptions=[
-            left_cam, left_rectify, left_encoder, left_trt, left_decoder, 
-            right_cam, right_rectify, right_encoder, right_trt, right_decoder
+            left_cam, left_rectify, left_encoder, left_trt, left_decoder, left_tracker, # ADDED TRACKER
+            right_cam, right_rectify, right_encoder, right_trt, right_decoder, right_tracker # ADDED TRACKER
         ],
         arguments=['--ros-args', '--log-level', 'error'],
         output='screen'
